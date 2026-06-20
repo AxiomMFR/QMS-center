@@ -41,6 +41,7 @@
             display: flex;
             flex-direction: column;
             padding: 20px;
+            flex-shrink: 0;
         }
 
         .logo-container {
@@ -101,6 +102,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
+            gap: 15px;
         }
 
         .header-title h1 {
@@ -125,12 +127,13 @@
             color: #56d364;
             font-size: 13px;
             font-weight: 500;
+            white-space: nowrap;
         }
 
         /* Grid Framework */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
         }
 
@@ -193,6 +196,42 @@
         .card-btn:hover {
             background-color: #30363d;
             border-color: #8b949e;
+        }
+
+        /* iPad & Tablet Optimization Rules */
+        @media (max-width: 992px) {
+            body {
+                flex-direction: column;
+                overflow: auto;
+                height: auto;
+            }
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 15px 20px;
+            }
+            .logo-container {
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+            }
+            .nav-menu {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .nav-item {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+            .main-content {
+                padding: 20px;
+            }
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
         }
     </style>
 </head>
