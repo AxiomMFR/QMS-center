@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axiom QMS Command Center</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0d1117;
+            --bg-card: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-blue: #58a6ff;
+            --accent-green: #2ea44f;
+            --accent-orange: #f0883e;
+            --status-pass: #238636;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-card);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            font-size: 24px;
+            color: var(--accent-blue);
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: background 0.2s;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent-blue);
+        }
+
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header-title h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: rgba(35, 134, 54, 0.15);
+            border: 1px solid var(--status-pass);
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: #56d364;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Grid Framework */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .card-icon {
+            font-size: 22px;
+            color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.08);
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .card-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #21262d;
+            border: 1px solid var(--border-color);
+            color: var(--accent-blue);
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            margin-top: 16px;
+            transition: background 0.2s;
+        }
+
+        .card-btn:hover {
+            background-color: #30363d;
+            border-color: #8b949e;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo-container">
+            <i class="fa-solid fa-layer-group logo-icon"></i>
+            <div class="logo-text">AXIOM QMS</div>
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-folder-open"></i> Document Control</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-clipboard-check"></i> Quality Records</a>
+            <a href="#" class="nav-item"><i class="fa-solid fa-gears"></i> Settings</a>
+        </nav>
+    </div>
+
+    <!-- Main Content Panel -->
+    <div class="main-content">
+        <div class="header">
+            <div class="header-title">
+                <h1>Command Center</h1>
+                <p>ISO 9001:2015 Compliance Operations</p>
+            </div>
+            <div class="system-status">
+                <i class="fa-solid fa-circle-check"></i> QMS Secure Link Active
+            </div>
+        </div>
+
+        <!-- Dashboard Grid Modules -->
+        <div class="grid-container">
+            
+            <!-- Module 01 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-book card-icon"></i>
+                    </div>
+                    <div class="card-title">01-Manuals</div>
+                    <div class="card-desc">Core Corporate Quality Manual and high-level policy statements.</div>
+                </div>
+                <a href="https://drive.google.com/drive/folders/YOUR_01_MANUALS_FOLDER_ID" target="_blank" class="card-btn">
+                    Open Folder <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <!-- Module 02 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-diagram-project card-icon" style="color: var(--accent-orange); background: rgba(240,136,62,0.08);"></i>
+                    </div>
+                    <div class="card-title">02-Procedures</div>
+                    <div class="card-desc">Standard Operating Procedures (SOPs) governing shop processes.</div>
+                </div>
+                <a href="https://drive.google.com/drive/folders/YOUR_02_PROCEDURES_FOLDER_ID" target="_blank" class="card-btn" style="color: var(--accent-orange);">
+                    Open Folder <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <!-- Module 03 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-file-invoice card-icon" style="color: var(--accent-green); background: rgba(46,164,79,0.08);"></i>
+                    </div>
+                    <div class="card-title">03-Record Templates</div>
+                    <div class="card-desc">Blank forms, inspection logs, and calibration sheets ready for use.</div>
+                </div>
+                <a href="https://drive.google.com/drive/folders/YOUR_03_TEMPLATES_FOLDER_ID" target="_blank" class="card-btn" style="color: var(--accent-green);">
+                    Open Folder <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <!-- Module 04 -->
+            <div class="card">
+                <div>
+                    <div class="card-header">
+                        <i class="fa-solid fa-box-archive card-icon"></i>
+                    </div>
+                    <div class="card-title">04-Completed Records</div>
+                    <div class="card-desc">Executed quality sheets, customer orders, and sign-offs.</div>
+                </div>
+                <a href="https://drive.google.com/drive/folders/YOUR_04_COMPLETED_FOLDER_ID" target="_blank" class="card-btn">
+                    Open Folder <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
